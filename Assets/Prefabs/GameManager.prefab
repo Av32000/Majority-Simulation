@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityCount: 100
   entityPrefab: {fileID: 8374186444929506128, guid: 2cd77ae7fc37df544afcbaa3a56b3d28, type: 3}
+  entityCountField: {fileID: 0}
 --- !u!114 &436417298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,3 +61,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoneSize: {x: 98, y: 2, z: 98}
+  entityParent: {fileID: 0}
