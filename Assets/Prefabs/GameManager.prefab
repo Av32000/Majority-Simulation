@@ -45,9 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4960a703377f04c8af59e848de6217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityCount: 100
   entityPrefab: {fileID: 8374186444929506128, guid: 2cd77ae7fc37df544afcbaa3a56b3d28, type: 3}
-  entityCountField: {fileID: 0}
+  populationPanel1: {fileID: 0}
+  populationPanel2: {fileID: 0}
+  material1: {fileID: 2100000, guid: 01c9607e80f23994eb5c531cf71edf28, type: 2}
+  material2: {fileID: 2100000, guid: 40419f871a2139d49bd2a1b1743ee594, type: 2}
+  floorColor: {fileID: 0}
+  floorMaterial: {fileID: 2100000, guid: 4c066fca370552f4db7ff59cb971c721, type: 2}
 --- !u!114 &436417298
 MonoBehaviour:
   m_ObjectHideFlags: 0
