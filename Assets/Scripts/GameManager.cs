@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region Singleton
+    public static GameManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+    #endregion
+    
     Population[] populations = new Population[2];
 
     [SerializeField]
@@ -25,37 +33,55 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Material floorMaterial;
 
+    [SerializeField]
+    TMP_Text startBtn;
+
+    public bool isRun = false;
+
     private void Start()
     {
+        populationPanel1.name.text = "Population 1";
+        populationPanel2.name.text = "Population 2";
+
         populationPanel1.count.text = "0";
         populationPanel2.count.text = "0";
 
         populationPanel1.color.text = "#ff0000";
         populationPanel2.color.text = "#0000FF";
 
+        populationPanel1.speed.text = "1";
+        populationPanel2.speed.text = "1";
+
         floorColor.text = "#000000";
 
         spawnArea = GetComponent<SpawnArea>();
 
-        populations[0] = new Population(populationPanel1.name.text, Color.red, int.Parse(populationPanel1.count.text));
-        populations[1] = new Population(populationPanel2.name.text, Color.blue, int.Parse(populationPanel2.count.text));
+        populations[0] = new Population(populationPanel1.name.text, Color.red, int.Parse(populationPanel1.count.text), float.Parse(populationPanel1.speed.text));
+        populations[1] = new Population(populationPanel2.name.text, Color.blue, int.Parse(populationPanel2.count.text), float.Parse(populationPanel2.speed.text));
 
         UpdateColor();
         UpdatePlaneColor();
+        UpdateName();
+    }
+
+    public void ChangeState()
+    {
+        isRun = !isRun;
+        startBtn.text = isRun ? "Pause" : "Play";
     }
 
     public void UpdateCount()
     {
-        populations[0] = new Population(populationPanel1.name.text, Color.red, int.Parse(populationPanel1.count.text));
-        populations[1] = new Population(populationPanel2.name.text, Color.blue, int.Parse(populationPanel2.count.text));
+        populations[0] = new Population(populationPanel1.name.text, Color.red, int.Parse(populationPanel1.count.text), int.Parse(populationPanel1.speed.text));
+        populations[1] = new Population(populationPanel2.name.text, Color.blue, int.Parse(populationPanel2.count.text), int.Parse(populationPanel2.speed.text));
 
         spawnArea.Clear();
 
         material1.color = populations[0].color;
         material2.color = populations[1].color;
 
-        spawnArea.Spawn(populations[0].count, entityPrefab, material1);
-        spawnArea.Spawn(populations[1].count, entityPrefab, material2);
+        spawnArea.Spawn(populations[0].count, entityPrefab, material1, populations[0]);
+        spawnArea.Spawn(populations[1].count, entityPrefab, material2, populations[1]);
     }
 
     public void UpdateColor()
@@ -76,6 +102,18 @@ public class GameManager : MonoBehaviour
         material2.color = populations[1].color;
     }
 
+    public void UpdateSpeed()
+    {
+        populations[0].speed = float.Parse(populationPanel1.speed.text);
+        populations[1].speed = float.Parse(populationPanel2.speed.text);
+    }
+
+    public void UpdateName()
+    {
+        populationPanel1.title.text = populationPanel1.name.text;
+        populationPanel2.title.text = populationPanel2.name.text;
+    }
+
     public void UpdatePlaneColor()
     {
         Color floorColorC;
@@ -87,6 +125,11 @@ public class GameManager : MonoBehaviour
 
         floorMaterial.color = floorColorC;
     }
+
+    public Vector3 GetRandomPosition()
+    {
+        return spawnArea.GetRandomPosition();
+    }
 }
 
 public class Population
@@ -94,11 +137,13 @@ public class Population
     public string name;
     public Color color;
     public int count;
+    public float speed;
 
-    public Population(string name, Color color, int count)
+    public Population(string name, Color color, int count, float speed)
     {
         this.name = name;
         this.color = color;
         this.count = count;
+        this.speed = speed;
     }
 }

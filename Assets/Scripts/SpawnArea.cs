@@ -6,19 +6,16 @@ public class SpawnArea : MonoBehaviour
     Vector3 zoneSize;
     [SerializeField]
     Transform entityParent;
-    public void Spawn(int count, GameObject entityPrefab, Material material)
+    public void Spawn(int count, GameObject entityPrefab, Material material, Population pop)
     {
         for (int i = 0; i < count; i++)
         {
             GameObject go = Instantiate(entityPrefab);
 
-            go.transform.position = new Vector3(
-                Random.Range(transform.position.x - zoneSize.x / 2, transform.position.x + zoneSize.x / 2),  
-                Random.Range(transform.position.y - zoneSize.y / 2, transform.position.y + zoneSize.y / 2),
-                Random.Range(transform.position.z - zoneSize.z / 2, transform.position.z + zoneSize.z / 2)
-                );
+            go.transform.position = GetRandomPosition();
 
             go.GetComponent<Renderer>().sharedMaterial = material;
+            go.GetComponent<Entity>().SetPopulation(pop);
 
             go.transform.SetParent(entityParent);
         }
@@ -36,5 +33,14 @@ public class SpawnArea : MonoBehaviour
         {
             Destroy(entityParent.GetChild(i).gameObject);
         }
+    }
+
+    public Vector3 GetRandomPosition()
+    {
+        return new Vector3(
+                Random.Range(transform.position.x - zoneSize.x / 2, transform.position.x + zoneSize.x / 2),
+                Random.Range(transform.position.y - zoneSize.y / 2, transform.position.y + zoneSize.y / 2),
+                Random.Range(transform.position.z - zoneSize.z / 2, transform.position.z + zoneSize.z / 2)
+                );
     }
 }
