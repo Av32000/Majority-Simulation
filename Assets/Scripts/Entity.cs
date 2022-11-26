@@ -60,11 +60,21 @@ public class Entity : MonoBehaviour
     public void Match(Population _pop, EntityType _type)
     {
         if (pop == _pop || _type == EntityType.Undecided || type == EntityType.Militant) return;
-        if(_type == EntityType.Clasic && type == EntityType.Undecided)
+        if(_type == EntityType.Clasic)
         {
-            if (Random.Range(0, 100) < GameManager.instance.ClasicsUndecided)
+            if(type == EntityType.Undecided)
             {
-                Convert(_pop);
+                if (Random.Range(0, 100) < GameManager.instance.ClasicsUndecided)
+                {
+                    Convert(_pop);
+                }
+            }
+            else
+            {
+                if (Random.Range(0, 100) < GameManager.instance.ClasicsClasics)
+                {
+                    Convert(_pop);
+                }
             }
         }
         else

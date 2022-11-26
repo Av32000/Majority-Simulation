@@ -38,15 +38,31 @@ public class GameManager : MonoBehaviour
     TMP_Text startBtn;
 
     [Header("Match Percentage")]
-    public int MilitantsUndecided = 50;
-    public int MilitantsClasics = 25;
-    public int ClasicsUndecided = 25;
+    public int MilitantsUndecided = 90;
+    public int MilitantsClasics = 50;
+    public int ClasicsUndecided = 70;
+    public int ClasicsClasics = 25;
+
+    [SerializeField]UnityEngine.UI.Slider MU;
+    [SerializeField]UnityEngine.UI.Slider MC;
+    [SerializeField]UnityEngine.UI.Slider CU;
+    [SerializeField]UnityEngine.UI.Slider CC;
+
+    [SerializeField]TMP_Text MUT;
+    [SerializeField]TMP_Text MCT;
+    [SerializeField]TMP_Text CUT;
+    [SerializeField]TMP_Text CCT;
 
     [HideInInspector]
     public bool isRun = false;
 
     private void Start()
     {
+        MC.value = MilitantsClasics;
+        MU.value = MilitantsUndecided;
+        CU.value = ClasicsUndecided;
+        CC.value = ClasicsClasics;
+
         populationPanel1.name.text = "Population 1";
         populationPanel2.name.text = "Population 2";
 
@@ -181,6 +197,16 @@ public class GameManager : MonoBehaviour
             populationPanel1.militant.interactable = true;
             populationPanel2.militant.interactable = true;
         }
+
+        MilitantsClasics = (int)MC.value;
+        MilitantsUndecided = (int)MU.value;
+        ClasicsUndecided = (int)CU.value;
+        ClasicsClasics = (int)CC.value;
+
+        MUT.text = string.Format("M/U ({0}%) :", MU.value);
+        MCT.text = string.Format("M/C ({0}%) :", MC.value);
+        CUT.text = string.Format("C/U ({0}%) :", CU.value);
+        CCT.text = string.Format("C/C ({0}%) :", CC.value);
     }
 }
 
