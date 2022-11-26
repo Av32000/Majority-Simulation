@@ -25,17 +25,6 @@ public class SpawnArea : MonoBehaviour
 
     public void UpdateEntiyStatus()
     {
-        /*for (int i = 0; i < entityParent.childCount; i++)
-        {
-            Entity entity = entityParent.GetChild(i).GetComponent<Entity>();
-
-            if (entity.GetPopulation().name != "Undecided")
-            {
-                if (i < entity.GetPopulation().militant) entity.SetType(EntityType.Militant);
-                else entity.SetType(EntityType.Clasic);
-            }
-            else entity.SetType(EntityType.Undecided);
-        }*/
         int index = 0;
         for (int i = 0; i < entityParent.childCount; i++)
         {
@@ -84,26 +73,33 @@ public class SpawnArea : MonoBehaviour
 
     public void GetMilitantCount()
     {
-        int m = 0;
-        int c = 0;
-        int u = 0;
-        for (int i = 0; i < entityParent.childCount; i++)
-        {
-            switch (entityParent.GetChild(i).GetComponent<Entity>().GetEntityType())
-            {
-                case EntityType.Militant:
-                    m++;
-                    break;
-                case EntityType.Clasic:
-                    c++;
-                    break;
-                case EntityType.Undecided:
-                    u++;
-                    break;
-            }
-        }
+        int m = GetEntityCountByType(EntityType.Militant);
+        int c = GetEntityCountByType(EntityType.Clasic);
+        int u = GetEntityCountByType(EntityType.Undecided);
 
         Debug.Log(string.Format("Militant : {0}, Clasic : {1}, Undecided : {2}", m, c, u));
+    }
+
+    public int GetEntityCountByType(EntityType type)
+    {
+        int result = 0;
+        for (int i = 0; i < entityParent.childCount; i++)
+        {
+            if (entityParent.GetChild(i).GetComponent<Entity>().GetEntityType() == type) result++;
+        }
+
+        return result;
+    }
+
+    public int GetEntityCountByPopulation(Population pop)
+    {
+        int result = 0;
+        for (int i = 0; i < entityParent.childCount; i++)
+        {
+            if (entityParent.GetChild(i).GetComponent<Entity>().GetPopulation() == pop) result++;
+        }
+
+        return result;
     }
 
     public Vector3 GetRandomPosition()

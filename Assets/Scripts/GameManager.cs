@@ -25,12 +25,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     PopulationPanel populationPanel3;
 
-    [SerializeField]
-    Material material1;
-    [SerializeField]
-    Material material2;
-    [SerializeField]
-    Material material3;
+    public Material material1;
+    public Material material2;
+    public Material material3;
 
     [SerializeField]
     TMP_InputField floorColor;
@@ -40,6 +37,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     TMP_Text startBtn;
 
+    [Header("Match Percentage")]
+    public int MilitantsUndecided = 50;
+    public int MilitantsClasics = 25;
+    public int ClasicsUndecided = 25;
+
+    [HideInInspector]
     public bool isRun = false;
 
     private void Start()
@@ -110,7 +113,7 @@ public class GameManager : MonoBehaviour
             populationPanel2.color.text = ColorUtility.ToHtmlStringRGB(populations[1].color);
         }
 
-        if (!ColorUtility.TryParseHtmlString(populationPanel2.color.text, out populations[2].color))
+        if (!ColorUtility.TryParseHtmlString(populationPanel3.color.text, out populations[2].color))
         {
             populations[2].color = Color.gray;
             populationPanel3.color.text = ColorUtility.ToHtmlStringRGB(populations[2].color);
@@ -151,15 +154,33 @@ public class GameManager : MonoBehaviour
         return spawnArea.GetRandomPosition();
     }
 
-    public void MilitantValueChange()
-    {
-        if (isRun) ChangeState();
-    }
-
     private void Update()
     {
         populations[0].militant = (int)populationPanel1.militant.value;
         populations[1].militant = (int)populationPanel2.militant.value;
+
+        if (isRun)
+        {
+            populationPanel1.count.interactable = false;
+            populationPanel2.count.interactable = false;
+            populationPanel3.count.interactable = false;
+
+            populationPanel1.militant.interactable = false;
+            populationPanel2.militant.interactable = false;
+
+            populationPanel1.count.text = spawnArea.GetEntityCountByPopulation(populations[0]).ToString();
+            populationPanel2.count.text = spawnArea.GetEntityCountByPopulation(populations[1]).ToString();
+            populationPanel3.count.text = spawnArea.GetEntityCountByPopulation(populations[2]).ToString();
+        }
+        else
+        {
+            populationPanel1.count.interactable = true;
+            populationPanel2.count.interactable = true;
+            populationPanel3.count.interactable = true;
+
+            populationPanel1.militant.interactable = true;
+            populationPanel2.militant.interactable = true;
+        }
     }
 }
 
