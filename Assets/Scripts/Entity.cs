@@ -5,6 +5,8 @@ public class Entity : MonoBehaviour
     Population pop;
     Vector3 target;
 
+    EntityType type;
+
     void Update()
     {
         if (!GameManager.instance.isRun || pop == null) return;
@@ -27,4 +29,26 @@ public class Entity : MonoBehaviour
     {
         this.pop = pop;
     }
+
+    public void SetType(EntityType type)
+    {
+        this.type = type;
+    }
+
+    public EntityType GetEntityType()
+    {
+        return type;
+    }
+
+    public Population GetPopulation()
+    {
+        return pop;
+    }
+}
+
+public enum EntityType
+{
+    Undecided,
+    Clasic,
+    Militant
 }

@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     
-    Population[] populations = new Population[3];
+    public Population[] populations = new Population[3];
 
     [SerializeField]
     GameObject entityPrefab;
@@ -63,9 +63,9 @@ public class GameManager : MonoBehaviour
 
         spawnArea = GetComponent<SpawnArea>();
 
-        populations[0] = new Population(populationPanel1.name.text, Color.red, int.Parse(populationPanel1.count.text), float.Parse(populationPanel1.speed.text));
-        populations[1] = new Population(populationPanel2.name.text, Color.blue, int.Parse(populationPanel2.count.text), float.Parse(populationPanel2.speed.text));
-        populations[2] = new Population("Undecided", Color.gray, int.Parse(populationPanel3.count.text), float.Parse(populationPanel3.speed.text));
+        populations[0] = new Population(populationPanel1.name.text, Color.red, int.Parse(populationPanel1.count.text), float.Parse(populationPanel1.speed.text), (int)populationPanel1.militant.value);
+        populations[1] = new Population(populationPanel2.name.text, Color.blue, int.Parse(populationPanel2.count.text), float.Parse(populationPanel2.speed.text), (int)populationPanel2.militant.value);
+        populations[2] = new Population("Undecided", Color.gray, int.Parse(populationPanel3.count.text), float.Parse(populationPanel3.speed.text), 0);
 
         UpdateColor();
         UpdatePlaneColor();
@@ -75,14 +75,15 @@ public class GameManager : MonoBehaviour
     public void ChangeState()
     {
         isRun = !isRun;
+        if (isRun) spawnArea.UpdateEntiyStatus();
         startBtn.text = isRun ? "Pause" : "Play";
     }
 
     public void UpdateCount()
     {
-        populations[0] = new Population(populationPanel1.name.text, Color.red, int.Parse(populationPanel1.count.text), int.Parse(populationPanel1.speed.text));
-        populations[1] = new Population(populationPanel2.name.text, Color.blue, int.Parse(populationPanel2.count.text), int.Parse(populationPanel2.speed.text));
-        populations[2] = new Population("Undecided", Color.gray, int.Parse(populationPanel3.count.text), float.Parse(populationPanel3.speed.text));
+        populations[0].count = int.Parse(populationPanel1.count.text);
+        populations[1].count = int.Parse(populationPanel2.count.text);
+        populations[2].count = int.Parse(populationPanel3.count.text);
 
         spawnArea.Clear();
 
@@ -149,6 +150,17 @@ public class GameManager : MonoBehaviour
     {
         return spawnArea.GetRandomPosition();
     }
+
+    public void MilitantValueChange()
+    {
+        if (isRun) ChangeState();
+    }
+
+    private void Update()
+    {
+        populations[0].militant = (int)populationPanel1.militant.value;
+        populations[1].militant = (int)populationPanel2.militant.value;
+    }
 }
 
 public class Population
@@ -157,12 +169,14 @@ public class Population
     public Color color;
     public int count;
     public float speed;
+    public int militant;
 
-    public Population(string name, Color color, int count, float speed)
+    public Population(string name, Color color, int count, float speed, int militant)
     {
         this.name = name;
         this.color = color;
         this.count = count;
         this.speed = speed;
+        this.militant = militant;
     }
 }

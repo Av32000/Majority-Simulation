@@ -19,6 +19,53 @@ public class SpawnArea : MonoBehaviour
 
             go.transform.SetParent(entityParent);
         }
+
+        UpdateEntiyStatus();
+    }
+
+    public void UpdateEntiyStatus()
+    {
+        /*for (int i = 0; i < entityParent.childCount; i++)
+        {
+            Entity entity = entityParent.GetChild(i).GetComponent<Entity>();
+
+            if (entity.GetPopulation().name != "Undecided")
+            {
+                if (i < entity.GetPopulation().militant) entity.SetType(EntityType.Militant);
+                else entity.SetType(EntityType.Clasic);
+            }
+            else entity.SetType(EntityType.Undecided);
+        }*/
+        int index = 0;
+        for (int i = 0; i < entityParent.childCount; i++)
+        {
+            Entity entity = entityParent.GetChild(i).GetComponent<Entity>();
+
+            if(entity.GetPopulation() == GameManager.instance.populations[0])
+            {
+                if (index < entity.GetPopulation().count * entity.GetPopulation().militant / 100) entity.SetType(EntityType.Militant);
+                else entity.SetType(EntityType.Clasic);
+
+                index++;
+            }
+            else
+            {
+                if (entity.GetPopulation().name == "Undecided") entity.SetType(EntityType.Undecided);
+            }
+        }
+        index = 0;
+        for (int i = 0; i < entityParent.childCount; i++)
+        {
+            Entity entity = entityParent.GetChild(i).GetComponent<Entity>();
+
+            if (entity.GetPopulation() == GameManager.instance.populations[1])
+            {
+                if (index < entity.GetPopulation().count * entity.GetPopulation().militant / 100) entity.SetType(EntityType.Militant);
+                else entity.SetType(EntityType.Clasic);
+
+                index++;
+            }
+        }
     }
 
     private void OnDrawGizmos()
@@ -33,6 +80,30 @@ public class SpawnArea : MonoBehaviour
         {
             Destroy(entityParent.GetChild(i).gameObject);
         }
+    }
+
+    public void GetMilitantCount()
+    {
+        int m = 0;
+        int c = 0;
+        int u = 0;
+        for (int i = 0; i < entityParent.childCount; i++)
+        {
+            switch (entityParent.GetChild(i).GetComponent<Entity>().GetEntityType())
+            {
+                case EntityType.Militant:
+                    m++;
+                    break;
+                case EntityType.Clasic:
+                    c++;
+                    break;
+                case EntityType.Undecided:
+                    u++;
+                    break;
+            }
+        }
+
+        Debug.Log(string.Format("Militant : {0}, Clasic : {1}, Undecided : {2}", m, c, u));
     }
 
     public Vector3 GetRandomPosition()
