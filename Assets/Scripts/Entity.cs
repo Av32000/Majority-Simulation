@@ -100,6 +100,7 @@ public class Entity : MonoBehaviour
     {
         pop = _pop;
         type = EntityType.Clasic;
+        if (GameManager.instance.keepMajorityPercentage.isOn) GameManager.instance.UpdateEntityStatus();
     }
 }
 

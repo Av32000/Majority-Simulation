@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]TMP_Text CUT;
     [SerializeField]TMP_Text CCT;
 
+    public UnityEngine.UI.Toggle keepMajorityPercentage;
+
     [HideInInspector]
     public bool isRun = false;
 
@@ -211,6 +213,11 @@ public class GameManager : MonoBehaviour
         MCT.text = string.Format("M/C ({0}%) :", MC.value);
         CUT.text = string.Format("C/U ({0}%) :", CU.value);
         CCT.text = string.Format("C/C ({0}%) :", CC.value);
+    }
+
+    public void UpdateEntityStatus()
+    {
+        spawnArea.UpdateEntiyStatus();
     }
 }
 
