@@ -52,3 +52,7 @@ On the right side of the screen, you can change the settings for each population
 3. Color => The colour of the members of this population
 4. Speed => The speed of movement of the members of the population
 5. Millitant (%) => The percentage of millitant in this population
+
+## Exemples
+![RedWine / WhiteWine](https://raw.githubusercontent.com/Av32000/Majority-Simulation/main/src/Red-White%20wine.png)
+![DarkChocolate / Milk Chocolate](https://raw.githubusercontent.com/Av32000/Majority-Simulation/main/src/Milk-Dark.png)
