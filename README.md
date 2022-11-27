@@ -26,7 +26,7 @@ Open it with Unity and build the project.
 
 ### Direct Launch
 
-To run the project directly, download [this archive](https://github.com/Av32000/Majority-Simulation/blob/main/src/MajoritySimulation.zip), unnzip it, and run `Majority Simulation.exe`
+To run the project directly, download [this archive](https://github.com/Av32000/Majority-Simulation/releases/tag/v1.0), unnzip it, and run `Majority Simulation.exe`
 
 ## Usage
 
