@@ -187,6 +187,10 @@ public class GameManager : MonoBehaviour
             populationPanel1.count.text = spawnArea.GetEntityCountByPopulation(populations[0]).ToString();
             populationPanel2.count.text = spawnArea.GetEntityCountByPopulation(populations[1]).ToString();
             populationPanel3.count.text = spawnArea.GetEntityCountByPopulation(populations[2]).ToString();
+
+            populations[0].count = spawnArea.GetEntityCountByPopulation(populations[0]);
+            populations[1].count = spawnArea.GetEntityCountByPopulation(populations[1]);
+            populations[2].count = spawnArea.GetEntityCountByPopulation(populations[2]);
         }
         else
         {
