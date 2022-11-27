@@ -10,7 +10,7 @@ There are 3 types of people / 3 populations:
 
 Each time two people meet, they can convert the other to their side/population.
 
-Idea based on a video of [Fouloscopie](https://www.youtube.com/@Fouloscopie) : [![Preview](https://github.com/Av32000/Majority-Simulation/blob/main/src/Videopreview.jpg)](https://www.youtube.com/watch?v=gtXHv95pwyE&t=998s)
+Idea based on a video of [Fouloscopie](https://www.youtube.com/@Fouloscopie) : [![Preview](https://raw.githubusercontent.com/Av32000/Majority-Simulation/main/src/Videopreview.jpg)](https://www.youtube.com/watch?v=gtXHv95pwyE&t=998s)
 
 ## Installation
 
@@ -30,7 +30,7 @@ To run the project directly, download [this archive](https://github.com/Av32000/
 
 ## Usage
 
-When the project is launched, you will arrive at this screen : ![HomeScreen](https://github.com/Av32000/Majority-Simulation/blob/main/src/HomeScreen.png)
+When the project is launched, you will arrive at this screen : ![HomeScreen](https://raw.githubusercontent.com/Av32000/Majority-Simulation/main/src/HomeScreen.png)
 
 ### Global Settings
 
