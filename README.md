@@ -1,4 +1,4 @@
-# Majority Simulation
+# Majority Simulation (Prototype)
 
 It is a simple simulation tool that can predict which side the majority of a crowd will be on according to certain criteria.
 
